@@ -7,6 +7,7 @@
 ## 🧭 Accès Rapide
 
 - 🧠 **Notre Mémoire :** [[Memoire|Voir ce qui est en cours avec l'IA]]
+- 🛠️ **Les Super-Pouvoirs :** [[Skills/Index-des-Skills|Les 6 compétences automatiques de l'IA]]
 - 📜 **Règles du Jeu :** [[REGLES-IA|Comment travaillent Claude et ChatGPT]]
 - 💬 **Le Prompt à copier :** [[PROMPT-CLAUDE-ET-CHATGPT|Le texte magique pour vos IA]]
 

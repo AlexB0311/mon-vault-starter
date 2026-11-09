@@ -58,6 +58,18 @@
 
 ---
 
+## 🛠️ Les 6 Super-Pouvoirs Inclus (Skills)
+
+Votre coffre contient 6 compétences prêtes à l'emploi dans le dossier `Skills/` :
+1. **Démarrage** (*« Bonjour »*) : Reprend le contexte en 1 seconde.
+2. **Ranger la boîte** (*« Range ma boîte de réception »*) : Classe les brouillons accumulés.
+3. **Plan d'action** (*« Fais-moi un plan d'action pour [X] »*) : Découpe une idée en 3 étapes concrètes.
+4. **Synthèse express** (*« Résume-moi ce document »*) : Extrait les 3 idées fortes et la leçon de vie.
+5. **Rédaction impact** (*« Rédige un message pour [X] »*) : Écrit un email percutant et personnalisé.
+6. **Clôture** (*« On s'arrête »*) : Met à jour la mémoire et prépare la prochaine session.
+
+---
+
 ## 📖 Guide Complet en PDF
 Un tutoriel PDF illustré de 4 pages sans aucun jargon technique est disponible dans le dossier `docs/` :  
-👉 **`docs/GUIDE-COFFRE-FORT-FACILE.pdf`**
+👉 **`docs/GUIDE-COFFRE-FORT-FACILE.pdf`** ([Téléchargement direct](https://github.com/AlexB0311/mon-vault-starter/raw/main/docs/GUIDE-COFFRE-FORT-FACILE.pdf))

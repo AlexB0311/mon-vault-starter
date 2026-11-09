@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide Facile : Mon Coffre-Fort Personnel avec Claude et ChatGPT</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --primary: #059669;
+      --primary-dark: #065f46;
+      --primary-light: #ecfdf5;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --accent-amber: #d97706;
+      --dark: #0f172a;
+      --gray-800: #1e293b;
+      --gray-700: #334155;
+      --gray-600: #475569;
+      --gray-500: #64748b;
+      --gray-200: #e2e8f0;
+      --gray-100: #f1f5f9;
+      --gray-50: #f8fafc;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--gray-800);
+      background-color: var(--white);
+      line-height: 1.6;
+      font-size: 13.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 12mm 14mm 14mm 14mm;
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      min-height: 270mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--gray-200);
+      margin-bottom: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .doc-header .badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    .doc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1.5px solid var(--gray-200);
+      margin-top: 20px;
+      font-size: 10px;
+      color: var(--gray-500);
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 16px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      color: var(--gray-700);
+    }
+
+    strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #d1fae5;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      color: var(--white);
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: #d1fae5;
+      font-size: 13.5px;
+      line-height: 1.5;
+      max-width: 650px;
+      margin-bottom: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 11.5px;
+      color: var(--gray-600);
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+
+    .infographic-box {
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 14px 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      page-break-inside: avoid;
+    }
+
+    .infographic-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 14px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 14px;
+      page-break-inside: avoid;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex-grow: 1;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: var(--gray-700);
+      margin-bottom: 0;
+    }
+
+    .btn-mockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1f883d;
+      color: white;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin: 2px 0;
+    }
+
+    .callout {
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .callout-success {
+      background-color: #ecfdf5;
+      border-left: 4px solid var(--primary);
+      color: #064e3b;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      margin: 10px 0;
+      overflow-x: hidden;
+      border: 1px solid #334155;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 12px;
+    }
+
+    th {
+      background-color: var(--gray-100);
+      color: var(--dark);
+      text-align: left;
+      padding: 8px 10px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--gray-700);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 1 : PRÉSENTATION DU COFFRE-FORT & SCHÉMA SIMPLE -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span>Votre Coffre-Fort Personnel · Édition Débutant</span>
+        <span class="badge">Zéro Ligne de Commande</span>
+      </div>
+
+      <div class="hero">
+        <span class="hero-tag">Guide Pratique pour Tous</span>
+        <h1>Votre Coffre-Fort Numérique Personnel</h1>
+        <p>Gardez vos idées, vos projets et vos contacts au même endroit. Travaillez en direct avec <strong>Claude</strong> et <strong>ChatGPT</strong> sans qu'ils n'oublient jamais rien, le tout synchronisé sur votre ordinateur et votre smartphone.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">🔒 100% à Vous</div>
+          <div class="card-desc">Vos notes restent chez vous en fichiers simples. Aucun abonnement mensuel à payer, vos données sont protégées.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🤖 Claude + ChatGPT</div>
+          <div class="card-desc">Vos 2 IA préférées partagent la même mémoire grâce au fichier <code>Memoire.md</code>. Fini de tout réexpliquer !</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🖱️ Zéro Ligne de Code</div>
+          <div class="card-desc">Tout se configure par clics simples dans des fenêtres visuelles. Aucune commande technique à taper.</div>
+        </div>
+      </div>
+
+      <h2>Comment ça fonctionne ? (En un coup d'œil)</h2>
+      <div class="infographic-box">
+        <div class="infographic-title">Le fonctionnement simplifié de votre Coffre-fort</div>
+        <svg viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="760" height="220" rx="10" fill="#F8FAFC"/>
+
+          <!-- Coffre Central -->
+          <rect x="250" y="25" width="260" height="170" rx="12" fill="#FFFFFF" stroke="#059669" stroke-width="2"/>
+          <rect x="250" y="25" width="260" height="32" rx="12" fill="#ECFDF5"/>
+          <text x="380" y="46" fill="#065F46" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="12" text-anchor="middle">🔐 MON COFFRE-FORT (VAULT)</text>
+          
+          <rect x="270" y="70" width="220" height="30" rx="6" fill="#F1F5F9" stroke="#CBD5E1"/>
+          <text x="380" y="89" fill="#0F172A" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="11" text-anchor="middle">🧠 Memoire.md (Mémoire partagée)</text>
+          
+          <text x="275" y="125" fill="#475569" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5">📁 01-Moi (Objectifs & Mode d'emploi)</text>
+          <text x="275" y="145" fill="#475569" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5">📁 02-Projets (Mes chantiers en cours)</text>
+          <text x="275" y="165" fill="#475569" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5">📁 03-Contacts · 📁 04-Ressources</text>
+          <text x="275" y="185" fill="#DC2626" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="600">📥 _Boite-de-Reception (Pour jeter en vrac)</text>
+
+          <!-- Assistant 1 : Claude -->
+          <rect x="30" y="65" width="170" height="90" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
+          <text x="115" y="92" fill="#D97706" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" text-anchor="middle">🟠 CLAUDE</text>
+          <text x="115" y="112" fill="#64748B" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" text-anchor="middle">Rédaction, analyse,</text>
+          <text x="115" y="128" fill="#64748B" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" text-anchor="middle">synthèse et stratégie</text>
+          <path d="M 200 110 L 250 110" stroke="#D97706" stroke-width="2" stroke-dasharray="3 3"/>
+
+          <!-- Assistant 2 : ChatGPT -->
+          <rect x="560" y="65" width="170" height="90" rx="10" fill="#FFFFFF" stroke="#10B981" stroke-width="1.5"/>
+          <text x="645" y="92" fill="#059669" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" text-anchor="middle">🟢 CHATGPT</text>
+          <text x="645" y="112" fill="#64748B" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" text-anchor="middle">Idées, brainstorming,</text>
+          <text x="645" y="128" fill="#64748B" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" text-anchor="middle">recherche et correction</text>
+          <path d="M 560 110 L 510 110" stroke="#10B981" stroke-width="2" stroke-dasharray="3 3"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Mon Coffre-Fort Personnel · Guide Grand Public</span>
+      <span>Page 1 / 4</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 2 : LES DOSSIERS & LES 3 PHRASES MAGIQUES -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span>Votre Coffre-Fort Personnel · Édition Débutant</span>
+        <span class="badge">Organisation & Rituels</span>
+      </div>
+
+      <h2>Les Dossiers de Votre Coffre-Fort</h2>
+      <p>Pas besoin de vous casser la tête à créer des dizaines de dossiers. Votre coffre est déjà rangé en 5 zones indispensables :</p>
+
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-number" style="background:#4338ca;">1</div>
+          <div class="step-content">
+            <div class="step-title">01 · Moi (Qui vous êtes)</div>
+            <div class="step-text">Contient votre fiche <code>Mon-Mode-d-Emploi.md</code> et vos <code>Mes-Objectifs.md</code>. C'est ici que vous notez vos priorités pour que Claude et ChatGPT vous connaissent par cœur.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number" style="background:#0284c7;">2</div>
+          <div class="step-content">
+            <div class="step-title">02 · Projets (Ce que vous construisez)</div>
+            <div class="step-text">Chaque projet a sa propre fiche (ex: <code>Exemple-Mon-Projet.md</code>). Vous y retrouvez l'état d'avancement, vos idées et vos prochaines étapes à réaliser.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number" style="background:#059669;">3</div>
+          <div class="step-content">
+            <div class="step-title">03 · Contacts (Votre carnet d'adresses)</div>
+            <div class="step-text">Une fiche par personne importante (partenaires, clients, amis). Plus de carnet d'adresses perdu : notez-y ce que vous vous êtes dit la dernière fois.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number" style="background:#d97706;">4</div>
+          <div class="step-content">
+            <div class="step-title">04 · Ressources (Vos inspirations)</div>
+            <div class="step-text">Vos notes de lecture, articles intéressants, citations et liens utiles que vous souhaitez garder sous la main.</div>
+          </div>
+        </div>
+
+        <div class="step-item" style="border: 1.5px dashed #ef4444; background: #fff5f5;">
+          <div class="step-number" style="background:#dc2626;">📥</div>
+          <div class="step-content">
+            <div class="step-title" style="color:#b91c1c;">La Boîte de Réception (Pour les jours pressés)</div>
+            <div class="step-text">Vous n'avez pas le temps de classer ? Jetez votre note ou document brut dans <code>_Boite-de-Reception/</code>. Demandez plus tard à l'IA : <em>« Range ma boîte de réception »</em> et elle s'occupe de tout !</div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Les 3 Phrases Magiques à Dire à Claude ou ChatGPT</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 32%;">Ce que vous dites</th>
+            <th style="width: 38%;">Ce que fait l'IA automatiquement</th>
+            <th>Résultat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>« Bonjour »</strong> ou <strong>« On reprend »</strong></td>
+            <td>Ouvre <code>Memoire.md</code> et vous rappelle le contexte exact du dernier échange.</td>
+            <td>Zéro temps perdu à se remettre dans le bain.</td>
+          </tr>
+          <tr>
+            <td><strong>« Note ça : [votre info] »</strong></td>
+            <td>Cherche si une note existe déjà, la met à jour sans faire de doublon.</td>
+            <td>Votre coffre-fort reste propre et à jour.</td>
+          </tr>
+          <tr>
+            <td><strong>« On s'arrête »</strong></td>
+            <td>Met à jour la mémoire, résume ce qui a été fait et note la suite.</td>
+            <td>Tout est prêt pour la prochaine session.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-footer">
+      <span>Mon Coffre-Fort Personnel · Guide Grand Public</span>
+      <span>Page 2 / 4</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 3 : INSTALLATION EN 3 ÉTAPES (ZÉRO LIGNE DE COMMANDE) -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span>Votre Coffre-Fort Personnel · Édition Débutant</span>
+        <span class="badge">Prise en Main en 3 Minutes</span>
+      </div>
+
+      <h2>Installation Pas-à-Pas (100% Clics Visuels)</h2>
+      <p>Suivez ces 3 étapes simples sans jamais ouvrir de terminal ou taper de code :</p>
+
+      <div class="steps-container">
+        
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Créer votre coffre privé sur GitHub (1 clic)</div>
+            <div class="step-text">
+              Rendez-vous sur le modèle officiel :  
+              <strong style="color:var(--accent);">https://github.com/AlexB0311/mon-vault-starter</strong>  
+              <br>Cliquez sur le bouton vert <span class="btn-mockup">Use this template</span> puis sur <strong>Create a new repository</strong>.  
+              <br>Donnez un nom (ex: <code>mon-coffre-fort</code>), cochez <strong>Private</strong> (privé) et validez.
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Le récupérer sur votre ordinateur (via GitHub Desktop)</div>
+            <div class="step-text">
+              Téléchargez l'application gratuite <strong style="color:var(--accent);">GitHub Desktop</strong> (desktop.github.com).  
+              <br>Connectez-vous à votre compte GitHub, cliquez sur <strong>Clone a repository</strong>, sélectionnez votre coffre et choisissez où le stocker sur votre disque dur.  
+              <br><em>(Astuce encore plus simple sans compte : cliquez sur <strong>Code > Download ZIP</strong> sur GitHub et décompressez le dossier).</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Ouvrir votre coffre dans Obsidian</div>
+            <div class="step-text">
+              Téléchargez et ouvrez <strong>Obsidian</strong> (obsidian.md).  
+              <br>Cliquez sur <strong>« Ouvrir un dossier comme coffre »</strong> (icône de dossier) et choisissez le dossier de votre coffre-fort.  
+              <br>C'est tout ! Vous arrivez directement sur votre <code>Tableau-de-Bord.md</code>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2>Synchroniser sur son Smartphone (Optionnel mais Magique)</h2>
+      <div class="callout callout-success">
+        <div>📱</div>
+        <div>
+          <strong>Vos notes dans votre poche :</strong> Installez l'application <strong>Obsidian</strong> sur votre téléphone (iOS ou Android).  
+          Activez le plugin gratuit <em>Obsidian Git</em> ou utilisez l'application <em>Working Copy</em> sur iPhone pour retrouver l'intégralité de vos notes hors-ligne partout où vous allez.
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Mon Coffre-Fort Personnel · Guide Grand Public</span>
+      <span>Page 3 / 4</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 4 : LE PROMPT POUR CLAUDE ET CHATGPT -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span>Votre Coffre-Fort Personnel · Édition Débutant</span>
+        <span class="badge">Le Prompt Magique</span>
+      </div>
+
+      <h2>Le Prompt à Copier-Coller dans Claude et ChatGPT</h2>
+      <p>Copiez ce texte et collez-le dans votre discussion sur <strong>chatgpt.com</strong> ou <strong>claude.ai</strong> (ou configurez-le dans un <em>Projet Claude</em> ou dans vos <em>Instructions personnalisées ChatGPT</em>) :</p>
+
+      <pre><code>Tu es mon partenaire et assistant de confiance opérant sur mon Coffre-fort numérique personnel (mon vault Obsidian).
+
+Ton rôle est de m'aider à faire avancer mes projets et de garder en mémoire le fil de notre travail sans jamais être amnésique.
+
+VOICI NOS RÈGLES DE COLLABORATION :
+
+1. DÉMARRAGE :
+Quand je te dis « Bonjour » ou « On reprend » :
+- Lis immédiatement notre fichier central Memoire.md (et applique REGLES-IA.md).
+- Réponds-moi en une seule phrase amicale en me rappelant sur quoi nous travaillions la dernière fois et la prochaine étape prévue.
+- Ne me demande JAMAIS de te réexpliquer ce qui est déjà noté dans le coffre.
+
+2. PENDANT QU'ON DISCUTE :
+- Quand je dis « Note ça : [info] », vérifie d'abord si une note existe déjà avant d'en créer une nouvelle (évite les doublons).
+- Si une information ou un document n'a pas de place évidente, range-le dans le dossier _Boite-de-Reception/.
+- Ne supprime jamais de note : si une chose est finie ou obsolète, déplace-la dans le dossier _Archives/.
+- Tu as 6 Super-Pouvoirs documentés dans le dossier Skills/ (démarrage, ranger-boite, plan-d-action, synthese-express, redaction-impact, cloture). Dès que ma demande y correspond, applique la méthode correspondante.
+
+3. CLÔTURE DE SESSION :
+Quand je dis « On s'arrête », « Fin de session » ou « C'est bon pour aujourd'hui » :
+- Mets à jour le fichier Memoire.md avec :
+  1. Ce que nous avons accompli aujourd'hui.
+  2. L'état actuel de mes projets.
+  3. La prochaine action recommandée pour notre prochaine discussion.
+- Termine par un mini-résumé de 3 lignes.
+
+Si tu as bien compris, confirme-le moi simplement et commençons !</code></pre>
+
+      <h2>Les 6 Super-Pouvoirs Inclus dans Votre Coffre (Skills)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Super-Pouvoir</th>
+            <th style="width: 33%;">Phrase magique à dire</th>
+            <th>Ce que fait Claude ou ChatGPT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Démarrage</strong></td>
+            <td><em>« Bonjour »</em> ou <em>« On reprend »</em></td>
+            <td>Lit <code>Memoire.md</code> et rappelle le contexte en 1 seconde.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Ranger la boîte</strong></td>
+            <td><em>« Range ma boîte »</em></td>
+            <td>Trie les notes de <code>_Boite-de-Reception/</code> sans doublon.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Plan d'action</strong></td>
+            <td><em>« Fais-moi un plan d'action »</em></td>
+            <td>Transforme une idée en 3 étapes concrètes dans <code>02-Projets/</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>4. Synthèse express</strong></td>
+            <td><em>« Résume-moi ce document »</em></td>
+            <td>Extrait 3 idées fortes et la leçon pratique dans <code>04-Ressources/</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>5. Rédaction impact</strong></td>
+            <td><em>« Rédige un message pour [X] »</em></td>
+            <td>Écrit un email ou post percutant adapté au destinataire.</td>
+          </tr>
+          <tr>
+            <td><strong>6. Clôture</strong></td>
+            <td><em>« On s'arrête »</em></td>
+            <td>Met à jour la mémoire, résume la journée et prépare la suite.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-success">
+        <div>🎉</div>
+        <div>
+          <strong>Félicitations !</strong> Vous disposez maintenant d'un coffre personnel pérenne, souverain et sans aucun abonnement payant, épaulé par Claude et ChatGPT.
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Mon Coffre-Fort Personnel · Guide Grand Public</span>
+      <span>Page 4 / 4</span>
+    </div>
+  </div>
+
+</body>
+</html>

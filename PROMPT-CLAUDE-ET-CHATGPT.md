@@ -22,6 +22,7 @@ Quand je te dis « Bonjour » ou « On reprend » :
 - Quand je dis « Note ça : [info] », vérifie d'abord si une note existe déjà avant d'en créer une nouvelle (évite les doublons).
 - Si une information ou un document n'a pas de place évidente, range-le dans le dossier _Boite-de-Reception/.
 - Ne supprime jamais de note : si une chose est finie ou obsolète, déplace-la dans le dossier _Archives/.
+- Tu as 6 Super-Pouvoirs documentés dans le dossier Skills/ (démarrage, ranger-boite, plan-d-action, synthese-express, redaction-impact, cloture). Dès que ma demande y correspond, applique la méthode correspondante.
 
 3. CLÔTURE DE SESSION :
 Quand je dis « On s'arrête », « Fin de session » ou « C'est bon pour aujourd'hui » :
